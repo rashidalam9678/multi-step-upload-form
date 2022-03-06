@@ -1,5 +1,3 @@
-
-
 function Confirm({ formData, setFormData }) {
   return (
     <div className="flex flex-col">

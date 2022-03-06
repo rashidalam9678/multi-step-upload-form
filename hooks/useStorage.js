@@ -1,9 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import {storage} from '../firebase/config'
-// import { createContext, useContext } from 'react';
-// const AppContext = createContext();
-
 const useStorage = (file) => {
 
     const [uploadProgress, setUploadProgress] = useState(0)
@@ -14,7 +11,6 @@ const useStorage = (file) => {
         const storageRef = ref(storage, 'allfiles/' + file.name);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
-        // Listen for state changes, errors, and completion of the upload.
         uploadTask.on('state_changed',
             (snapshot) => {
                 const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
@@ -38,15 +34,6 @@ const useStorage = (file) => {
 }
 export default useStorage
 
-// src/context/state.js
-
-
-
-
-
-// export function useAppContext() {
-//   return useContext(AppContext);
-// }
 
 
 

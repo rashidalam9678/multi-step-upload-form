@@ -1,4 +1,4 @@
-import {useState} from 'react'
+
 function Information({ formData, setFormData }) {
   return (
     <div className="flex flex-col justify-around mt-8">

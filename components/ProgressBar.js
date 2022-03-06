@@ -16,7 +16,7 @@ const ProgressBar = ({ file, setFile, formData, setFormData }) => {
 
 
     <div>
-      <p className='text-center text-sky-600 mb-2 mt-4'> Uploading File </p>
+      <p className='text-center text-sky-600 mb-4 mt-4'> Uploading File </p>
       <motion.div className="h-2 mt-4 mb-4 bg-sky-500"
         initial={{ width: 0 }}
         animate={{ width: uploadProgress + '%' }}

@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import ProgressBar from './ProgressBar';
+import ProgressBar from '../ProgressBar';
 
 
 const UploadForm = ({ formData, setFormData }) => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
+  
 
   const types = ['image/png', 'image/jpeg'];
 
@@ -22,14 +23,14 @@ const UploadForm = ({ formData, setFormData }) => {
 
   return (
     <form className='mt-8 mb-4'>
-      { formData.downloadUrl && <div className='flex justify-center items-center'>
-      
+      {formData.downloadUrl && <div className='flex justify-center items-center'>
+
         <img src={formData.downloadUrl} alt="Uploaded" className='w-auto h-32 object-cover' />
-      
+
       </div>}
 
       {file && !formData.downloadUrl ?
-          <div className="h-full w-full">
+        <div className="h-full w-full">
           {error && <div className="text-sm font-semibold text-gray-500 mt-4 text-center">{error}</div>}
           {file && <div className="text-sm font-semibold text-gray-500 mt-4 text-center">{file.name}</div>}
           {file && <ProgressBar file={file} setFile={setFile} formData={formData} setFormData={setFormData} />}

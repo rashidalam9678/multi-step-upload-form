@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Information from './steps/Information'
-import UploadForm from './UploadForm'
+import UploadForm from './steps/UploadForm'
 import Confirm from './steps/Confirm'
 import { db } from '../firebase/config'
 
@@ -52,7 +52,7 @@ const Form = () => {
     return (
         <div className="flex flex-col justify-center items-center">
             <div className="w-full h-2 ">
-                <div className={page === 0 ? "w-1/3 h-full bg-sky-500 rounded-full" : page == 1 ? "w-2/3 h-full bg-sky-500 rounded-full" : "w-full h-full bg-sky-500 rounde-full"}
+                <div className={page === 0 ? "w-1/3 h-full bg-sky-500 rounded-full mb-4" : page == 1 ? "w-2/3 h-full bg-sky-500 rounded-full mb-4" : "w-full h-full bg-sky-500 rounde-full mb-4"}
 
                 ></div>
             </div>
@@ -75,13 +75,23 @@ const Form = () => {
                         className='w-1/3 bg-sky-500 hover:bg-sky-600 text-white font-bold py-2 px-4 rounded-md'
                         onClick={() => {
                             if (page === FormTitles.length - 1) {
-                            } else {
-                                setPage((currPage) => currPage + 1);
+                                { CreateUpload(), setUploadStatus(!uploadStatus) }
+                            } 
+                            else if(page===0 && formData.name==="" || formData.email==="" || formData.password===""){
+                                alert("Please fill the form")
                             }
-                            if (page === FormTitles.length - 1) { CreateUpload(), setUploadStatus(!uploadStatus) }
-                        }}
+                            else if(page===1 && formData.downloadUrl===""){
+                                alert("Please upload a file")}
+                                else {
+                                    setPage((currPage) => currPage + 1);
+                                }  
+
+                            }
+                            
+
+                        }
                     >
-                        {page === FormTitles.length - 1 ? "Submit" : "Next" }
+                        {page === FormTitles.length - 1 ? "Submit" : "Next"}
                     </button>
                 </div>
             </div>
