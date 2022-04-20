@@ -202,12 +202,12 @@ const Form = () => {
                     {musicUploadStatus && <p className='text-center text-sky-600 text-xs mt-4'>Uploading album...</p>}
                 </div>}
             {successMesssage &&
-                <div className='flex items-center flex-col mt-8'>
-                    <p className='text-green-600 text-center text-xl font-semibold mb-4' > Post Created Successfully !</p>
+                <div className='flex items-center flex-col mt-8 h-[50vh]'>
+                    <p className='text-green-600 text-center text-2xl font-semibold mb-4' > Post Created Successfully !</p>
                     <button onClick={() => {
                         setSuccessMessage(false)
                         setPage(0)
-                    }} className='underline text-lg'>Go back to home</button>
+                    }} className='underline text-xl'>Go back to home</button>
                 </div>}
         </div>
     );
