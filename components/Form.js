@@ -18,8 +18,8 @@ const Form = () => {
     const [uploadPageError, setUploadPageError] = useState(null)
     const [musicFile, setMusicFile] = useState(null);
     const [imageFile, setImageFile] = useState(null);
-    const [imageDownloadURL, setImageDownloadURL] = useState("");
-    const [musicDownloadURL, setMusicDownloadURL] = useState("");
+    const [imageDownloadURL, setImageDownloadURL] = useState(null);
+    const [musicDownloadURL, setMusicDownloadURL] = useState(null);
 
     const [formData, setFormData] = useState({
         artist: "",
@@ -48,32 +48,29 @@ const Form = () => {
         const musicRef = ref(storage, `posts/${docRef.id}/music`);
         setImageUploadStatus(true);
         await uploadString(imageRef, imageFile, "data_url").then(async (snapshot) => {
-            await getDownloadURL(imageRef).then((downloadUrl)=>{
-                console.log("this is the image URL : ", downloadUrl);
+            await getDownloadURL(imageRef).then((downloadUrl) => {
                 setImageDownloadURL(downloadUrl);
+                console.log("this is the image URL : ", imageDownloadURL);
+                setImageUploadStatus(false);
             })
         });
 
-        setImageUploadStatus(false);
+        
         setmusicUploadStatus(true);
-
         await uploadString(musicRef, musicFile, "data_url").then(async (snapshot) => {
             await getDownloadURL(musicRef).then((downloadUrl) => {
                 setMusicDownloadURL(downloadUrl);
+                console.log("this is the Music URL : ", musicDownloadURL);
+                setmusicUploadStatus(false);
             })
-
-
+            await updateDoc(doc(db, "posts", docRef.id), {
+                imageDownloadUrl: imageDownloadURL,
+                musicDownloadUrl: musicDownloadURL,
+                timeStamp: serverTimestamp(),
+            });
+            console.log("documnet updated")
 
         });
-
-        setmusicUploadStatus(false);
-        await updateDoc(doc(db, "posts", docRef.id), {
-            imageDownloadUrl: imageDownloadURL,
-            musicDownloadUrl: musicDownloadURL,
-            timeStamp: serverTimestamp(),
-        });
-
-        console.log("documnet updated")
         setImageFile(null);
         setMusicFile(null);
 
@@ -156,7 +153,7 @@ const Form = () => {
                                             setInformationPageError("Commision should be between 0 and 20")
                                         }
                                         else if (formData.totalSupply > 10000 || formData.totalSupply <= 0) {
-                                            setInformationPageError("Total Supply should be between 0 and 1,000")
+                                            setInformationPageError("Total Supply should be between 0 and 10000")
                                         }
                                         else {
                                             setPage((currPage) => currPage + 1);
@@ -214,5 +211,3 @@ const Form = () => {
 }
 
 export default Form;
-
-
