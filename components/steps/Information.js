@@ -1,9 +1,9 @@
 
 function Information({ formData, setFormData }) {
   return (
-    <div className="mb-8">
-      <div className="flex justify-around mt-8">
-        <div className="w-1/2 mr-2">
+    <div className="mb-8 mx-4">
+      <div className="flex justify-around mt-8 flex-col md:flex-row">
+        <div className="md:w-1/2 w-full md:mr-2 mb-4">
           <label className="block text-gray-600 text-xs font-semibold mb-1 ml-2" htmlFor="artist">
             artist*
           </label>
@@ -18,7 +18,7 @@ function Information({ formData, setFormData }) {
             }
           />
         </div>
-        <div className="w-1/2 ml-2">
+        <div className="md:w-1/2 w-full md:ml-2">
           <label className="block text-gray-600 text-xs font-semibold mb-1 ml-2" htmlFor="name">
             name*
           </label>
@@ -34,8 +34,8 @@ function Information({ formData, setFormData }) {
           />
         </div>
       </div>
-      <div className="flex justify-around mt-8">
-        <div className="w-1/2 mr-2">
+      <div className="flex justify-around mt-8 flex-col md:flex-row items-center ">
+        <div className="md:w-1/2 w-full md:mr-2 mb-4">
           <label className="block text-gray-600 text-xs font-semibold mb-1 ml-2" htmlFor="title">
             title*
           </label>
@@ -50,7 +50,7 @@ function Information({ formData, setFormData }) {
             }
           />
         </div>
-        <div className="w-1/2 ml-2">
+        <div className="md:w-1/2 w-full md:ml-2 mb-4">
           <label className="block text-gray-600 text-xs font-semibold mb-1 ml-2" htmlFor="description">
             description*
           </label>
@@ -66,11 +66,8 @@ function Information({ formData, setFormData }) {
           />
         </div>
       </div>
-      <div className="flex justify-around mt-8">
-        <div>
-
-        </div>
-        <div className="w-1/2 mr-2">
+      <div className="flex md:justify-around mt-8 flex-col items-center md:flex-row">
+      <div className="w-full md:w-1/2 md:mr-2 ">
           <label className="block text-gray-600 text-xs font-semibold mb-1 ml-2" htmlFor="price">
             price*
           </label>
@@ -85,7 +82,7 @@ function Information({ formData, setFormData }) {
             }
           />
         </div>
-        <div className="w-1/2 ml-2">
+        <div className="w-full md:w-1/2 md:ml-2">
           <label className="block text-gray-600 text-xs font-semibold mb-1 ml-2" htmlFor="symbol">
             symbol*
           </label>
@@ -100,9 +97,10 @@ function Information({ formData, setFormData }) {
             }
           />
         </div>
+        
       </div>
-      <div className="flex justify-between mt-8">
-        <div className="w-1/2 mr-2">
+      <div className="flex md:justify-between mt-8 items-center flex-col md:flex-row mb-4">
+        <div className=" w-full md:w-1/2 md:mr-2 mb-4">
           <label className="block text-gray-600 text-xs  font-semibold mb-1 ml-2" htmlFor="total supply">
             total supply (0-10000)*
           </label>
@@ -119,7 +117,7 @@ function Information({ formData, setFormData }) {
             }
           />
         </div>
-       <div className="w-1/2 ml-2">
+       <div className="w-full md:w-1/2 md:ml-2 mb-4">
        <label className="block text-xs text-gray-600  font-semibold mb-1 ml-2" htmlFor="commision">
             commision (0-20 %)*
           </label>

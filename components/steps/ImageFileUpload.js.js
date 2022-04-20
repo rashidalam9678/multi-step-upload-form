@@ -7,7 +7,6 @@ const ImageFileUpload = ({ imageFile, setImageFile }) => {
 
   const AddImageFile = (e) => {
     const types = ['image/png', 'image/jpeg'];
-    console.log("image type", e.target.files[0].type);
 
     const reader = new FileReader();
     if (e.target.files[0] && types.includes(e.target.files[0].type)) {

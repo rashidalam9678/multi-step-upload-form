@@ -7,7 +7,6 @@ const MusicFileUpload = ({ musicFile, setMusicFile }) => {
 
   const AddMusicFile = (e) => {
     const types = ['audio/mpeg', 'audio/mp3'];
-    console.log("image type", e.target.files[0].type)
     const reader = new FileReader();
     if (e.target.files[0] && types.includes(e.target.files[0].type)) {
       reader.readAsDataURL(e.target.files[0]);

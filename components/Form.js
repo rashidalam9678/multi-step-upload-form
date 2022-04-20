@@ -48,24 +48,25 @@ const Form = () => {
         const musicRef = ref(storage, `posts/${docRef.id}/music`);
         setImageUploadStatus(true);
         await uploadString(imageRef, imageFile, "data_url").then(async (snapshot) => {
-            const downloadUrl = await getDownloadURL(imageRef);
-            console.log("image upload done");
-            setImageDownloadURL(downloadUrl);
-            console.log("this is the image URL : ", imageDownloadURL);
-
+            await getDownloadURL(imageRef).then((downloadUrl)=>{
+                console.log("this is the image URL : ", downloadUrl);
+                setImageDownloadURL(downloadUrl);
+            })
         });
 
         setImageUploadStatus(false);
         setmusicUploadStatus(true);
 
         await uploadString(musicRef, musicFile, "data_url").then(async (snapshot) => {
-            const downloadUrl = await getDownloadURL(musicRef);
-            console.log("this is the music URL : ", downloadUrl)
-            setMusicDownloadURL(downloadUrl);
+            await getDownloadURL(musicRef).then((downloadUrl) => {
+                setMusicDownloadURL(downloadUrl);
+            })
+
+
 
         });
-        setmusicUploadStatus(false);
 
+        setmusicUploadStatus(false);
         await updateDoc(doc(db, "posts", docRef.id), {
             imageDownloadUrl: imageDownloadURL,
             musicDownloadUrl: musicDownloadURL,
@@ -91,6 +92,7 @@ const Form = () => {
             })
         }
         setUploadStatus(false);
+        setSuccessMessage(true)
     }
 
     const FormTitles = ["Information", "Files Upload", "Confirmation"];
@@ -200,13 +202,13 @@ const Form = () => {
                     {musicUploadStatus && <p className='text-center text-sky-600 text-xs mt-4'>Uploading album...</p>}
                 </div>}
             {successMesssage &&
-            <div className='flex items-center flex-col mt-8'>
-                <p className='text-green-600 text-center text-xl font-semibold mb-4' > Post Created Successfully !</p>
-                <button onClick={()=>{
-                    setSuccessMessage(false)
-                    setPage(0)
-                }} className='underline text-lg'>Go back to home</button>
-            </div>}
+                <div className='flex items-center flex-col mt-8'>
+                    <p className='text-green-600 text-center text-xl font-semibold mb-4' > Post Created Successfully !</p>
+                    <button onClick={() => {
+                        setSuccessMessage(false)
+                        setPage(0)
+                    }} className='underline text-lg'>Go back to home</button>
+                </div>}
         </div>
     );
 }

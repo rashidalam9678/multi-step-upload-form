@@ -1,6 +1,6 @@
 function Confirmation({ formData}) {
   return (
-    <div className="flex flex-col items-center justify-center p-4 bg-gray-50 shadow-sm">
+    <div className="flex flex-col items-center justify-center p-4 bg-gray-50 shadow-sm w-[400px] md:w-[600px]">
       <p className="text-center text-sm my-2"> <span className="font-semibold">Artist : </span>{formData.artist} </p>
       <p className="text-center text-sm my-2"> <span className="font-semibold">Name : </span>{formData.name} </p>
       <p className="text-center text-sm my-2"> <span className="font-semibold">Title : </span>{formData.title} </p>
