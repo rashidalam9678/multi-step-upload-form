@@ -36,33 +36,30 @@ const Form = () => {
 
     // data upload to firebase
 
-    const CreatePost = async (e) => {
+    const CreatePost = async () => {
         if (uploadStatus) return;
         setUploadStatus(true);
 
-        const docRef = doc(collection(db, "posts"));
-        await setDoc(docRef, formData);
+        const docRef = await addDoc(collection(db, "posts"), formData);
         console.log("Document written with ID: ", docRef.id);
 
         const imageRef = ref(storage, `posts/${docRef.id}/image`);
         const musicRef = ref(storage, `posts/${docRef.id}/music`);
         setImageUploadStatus(true);
-        await uploadString(imageRef, imageFile, "data_url").then(async (snapshot) => {
-            await getDownloadURL(imageRef).then((downloadUrl) => {
-                setImageDownloadURL(downloadUrl);
-                console.log("this is the image URL : ", imageDownloadURL);
-                setImageUploadStatus(false);
-            })
+        await uploadString(imageRef, imageFile, "data_url").then(async snapshot => {
+            const downloadUrl = await getDownloadURL(imageRef);
+            console.log("this is the image URL : ", downloadUrl);
+            setImageDownloadURL(downloadUrl);
+            setImageUploadStatus(false);
         });
 
-        
         setmusicUploadStatus(true);
         await uploadString(musicRef, musicFile, "data_url").then(async (snapshot) => {
-            await getDownloadURL(musicRef).then((downloadUrl) => {
-                setMusicDownloadURL(downloadUrl);
-                console.log("this is the Music URL : ", musicDownloadURL);
-                setmusicUploadStatus(false);
-            })
+            const downloadUrl = await getDownloadURL(musicRef)
+            console.log("this is the Music URL : ", downloadUrl);
+            setMusicDownloadURL(downloadUrl);
+            setmusicUploadStatus(false);
+
             await updateDoc(doc(db, "posts", docRef.id), {
                 imageDownloadUrl: imageDownloadURL,
                 musicDownloadUrl: musicDownloadURL,
@@ -104,7 +101,7 @@ const Form = () => {
             )
         } else if (page === 1) {
             return (
-                <div className='flex flex-col items-center mt-8'>
+                <div className='flex flex-col items-center mt-8 mx-auto'>
                     <ImageFileUpload imageFile={imageFile} setImageFile={setImageFile} />
                     <MusicFileUpload musicFile={musicFile} setMusicFile={setMusicFile} />
                     {uploadPageError && <p className="text-red-500 text-center mt-4">{uploadPageError}</p>}
@@ -199,7 +196,7 @@ const Form = () => {
                     {musicUploadStatus && <p className='text-center text-sky-600 text-xs mt-4'>Uploading album...</p>}
                 </div>}
             {successMesssage &&
-                <div className='flex items-center flex-col mt-8 h-[50vh]'>
+                <div className='flex items-center flex-col mt-8 h-[50vh] justify-center'>
                     <p className='text-green-600 text-center text-2xl font-semibold mb-4' > Post Created Successfully !</p>
                     <button onClick={() => {
                         setSuccessMessage(false)

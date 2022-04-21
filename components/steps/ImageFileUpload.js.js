@@ -23,7 +23,7 @@ const ImageFileUpload = ({ imageFile, setImageFile }) => {
   }
   return (
     <div>
-      <div onClick={() => filePickerRef.current.click()} className="w-[400px] h-[150px] flex flex-col items-center justify-center border-dashed border-2 p-12 mx-8 cursor-pointer">
+      <div onClick={() => filePickerRef.current.click()} className="w-[300px] h-[150px] flex flex-col items-center justify-center border-dashed border-2 p-12 mx-8 cursor-pointer">
         {imageFile ?
           <div className='flex items-center justify-center'>
             <img src={imageFile} alt="cover image" className='w-[300px] h-[110px] object-contain' />

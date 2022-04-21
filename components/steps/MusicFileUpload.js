@@ -23,7 +23,7 @@ const MusicFileUpload = ({ musicFile, setMusicFile }) => {
   }
   return (
     <div>
-      <div onClick={() => filePickerRef.current.click()} className=' border-[2px] border-dashed border-gray-200 mt-4 mb-8 flex justify-center items-center cursor-pointer w-[400px] h-[150px] '>
+      <div onClick={() => filePickerRef.current.click()} className=' border-[2px] border-dashed border-gray-200 mt-4 mb-8 flex justify-center items-center cursor-pointer w-[350px] h-[150px] '>
         {musicFile ?
           <audio controls src={musicFile} ></audio> :
           <div className='flex flex-col items-center justify-center'>
