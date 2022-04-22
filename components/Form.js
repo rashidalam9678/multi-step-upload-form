@@ -18,8 +18,8 @@ const Form = () => {
     const [uploadPageError, setUploadPageError] = useState(null)
     const [musicFile, setMusicFile] = useState(null);
     const [imageFile, setImageFile] = useState(null);
-    const [imageDownloadURL, setImageDownloadURL] = useState(null);
-    const [musicDownloadURL, setMusicDownloadURL] = useState(null);
+    // const [imageDownloadURL, setImageDownloadURL] = useState(null);
+    // const [musicDownloadURL, setMusicDownloadURL] = useState(null);
 
     const [formData, setFormData] = useState({
         artist: "",
@@ -49,7 +49,11 @@ const Form = () => {
         await uploadString(imageRef, imageFile, "data_url").then(async snapshot => {
             const downloadUrl = await getDownloadURL(imageRef);
             console.log("this is the image URL : ", downloadUrl);
-            setImageDownloadURL(downloadUrl);
+            // setImageDownloadURL(downloadUrl);
+            
+            await updateDoc(doc(db, "posts", docRef.id), {
+                imageDownloadUrl: downloadUrl,
+            });
             setImageUploadStatus(false);
         });
 
@@ -57,14 +61,14 @@ const Form = () => {
         await uploadString(musicRef, musicFile, "data_url").then(async (snapshot) => {
             const downloadUrl = await getDownloadURL(musicRef)
             console.log("this is the Music URL : ", downloadUrl);
-            setMusicDownloadURL(downloadUrl);
-            setmusicUploadStatus(false);
+            // setMusicDownloadURL(downloadUrl);
 
             await updateDoc(doc(db, "posts", docRef.id), {
-                imageDownloadUrl: imageDownloadURL,
-                musicDownloadUrl: musicDownloadURL,
+                musicDownloadUrl: downloadUrl,
                 timeStamp: serverTimestamp(),
             });
+
+            setmusicUploadStatus(false);
             console.log("documnet updated")
 
         });
